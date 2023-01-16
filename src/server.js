@@ -21,3 +21,17 @@ server.get("/", (request, response) => {
     `
   );
 });
+
+// challenge 2
+server.get("/colour", (request, response) => {
+  const hex = request.query.hex || "ffffff";
+  response.send(
+    `
+    <style>
+      body {
+        background-color: #${hex};
+      }
+    </style>
+    `
+  );
+});
