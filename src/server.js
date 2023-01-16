@@ -23,6 +23,7 @@ server.get("/", (request, response) => {
 });
 
 // challenge 2
+/*
 server.get("/colour", (request, response) => {
   const hex = request.query.hex || "ffffff";
   response.send(
@@ -32,6 +33,25 @@ server.get("/colour", (request, response) => {
         background-color: #${hex};
       }
     </style>
+    `
+  );
+});
+*/
+
+// challenge 3
+server.get("/colour", (request, response) => {
+  const hex = request.query.hex || "ffffff";
+  response.send(
+    `
+    <style>
+      body {
+        background-color: #${hex};
+      }
+    </style>
+    <form>
+      <label for="hex">Hex:</label>
+      <input name="hex" value="${hex}">
+    </form>
     `
   );
 });
