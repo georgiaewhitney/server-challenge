@@ -57,6 +57,7 @@ server.get("/colour", (request, response) => {
 });
 
 // challenge 4
+/*
 server.get("/cheese", (request, response) => {
   response.send(
     `
@@ -68,4 +69,36 @@ server.get("/cheese", (request, response) => {
     </form>
     `
   );
+});
+*/
+
+// challenge 5
+const cheeseStore = [];
+const postCheese = express.urlencoded({ extended: false });
+
+server.get("/cheese", (request, response) => {
+  const cheeseList = cheeseStore.map((cheese) => {
+    return `<li>${cheese.name} - ${cheese.rating}/5</li>`;
+  });
+  response.send(
+    `
+    <form method="POST">
+      <label for="name">Cheese:</label>
+      <input name="name" id="name">
+      <label for="rating">Rating (0-5):</label>
+      <input type="range" name="rating" id="rating" min="0" max="5">
+      <button>Rate</button>
+    </form>
+    <ul>
+    ${cheeseList.join("")}
+    </ul>
+    `
+  );
+});
+
+server.post("/cheese", postCheese, (request, response) => {
+  const name = request.body.name;
+  const rating = request.body.rating;
+  cheeseStore.push({ name, rating });
+  response.redirect("/cheese");
 });
