@@ -50,7 +50,21 @@ server.get("/colour", (request, response) => {
     </style>
     <form>
       <label for="hex">Hex:</label>
-      <input name="hex" value="${hex}">
+      <input name="hex" id="hex" value="${hex}">
+    </form>
+    `
+  );
+});
+
+// challenge 4
+server.get("/cheese", (request, response) => {
+  response.send(
+    `
+    <form method="POST">
+      <label for="cheese">Cheese:</label>
+      <input name="cheese" id="cheese">
+      <label for="rating">Rating (0-5):</label>
+      <input type="range" name="rating" id="rating" min="0" max="5">
     </form>
     `
   );
